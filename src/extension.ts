@@ -20,6 +20,8 @@ let reporter: TelemetryReporter;
 const documentSelector = [
   { language: "home-assistant", scheme: "file" },
   { language: "home-assistant", scheme: "untitled" },
+  { language: "home-assistant-csharp", scheme: "file" },
+  { language: "home-assistant-csharp", scheme: "untitled" },
 ];
 
 export async function activate(
@@ -116,6 +118,11 @@ export async function activate(
   // is this really needed?
   vscode.languages.setLanguageConfiguration("home-assistant", {
     wordPattern: /("(?:[^\\"]*(?:\\.)?)*"?)|[^\s{}[\],:]+/,
+  });
+
+  // Set language configuration for C#
+  vscode.languages.setLanguageConfiguration("home-assistant-csharp", {
+    wordPattern: /\b[A-Za-z_][A-Za-z0-9_]*\b/,
   });
 
   context.subscriptions.push(reporter);

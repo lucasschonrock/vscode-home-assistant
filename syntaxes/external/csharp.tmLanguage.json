@@ -1,0 +1,145 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "C#",
+	"scopeName": "source.cs",
+	"fileTypes": [
+		"cs"
+	],
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#attributes"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.cs",
+					"match": "//.*$"
+				},
+				{
+					"name": "comment.block.cs",
+					"begin": "/\\*",
+					"end": "\\*/",
+					"patterns": [
+						{
+							"name": "comment.block.documentation.cs",
+							"match": "\\*/"
+						}
+					]
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.cs",
+					"match": "\\b(if|else|while|for|foreach|do|switch|case|default|break|continue|return|goto|try|catch|finally|throw|using|lock|yield)\\b"
+				},
+				{
+					"name": "keyword.modifier.cs",
+					"match": "\\b(public|private|protected|internal|static|readonly|const|virtual|override|abstract|sealed|extern|unsafe|volatile|async|await)\\b"
+				},
+				{
+					"name": "keyword.declaration.cs",
+					"match": "\\b(namespace|class|interface|struct|enum|delegate|event|operator|explicit|implicit|partial|get|set|add|remove|where|select|from|in|join|on|equals|into|let|orderby|ascending|descending|group|by)\\b"
+				},
+				{
+					"name": "keyword.operator.cs",
+					"match": "\\b(new|typeof|sizeof|is|as|ref|out|params|this|base|null|true|false)\\b"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.cs",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.cs",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "string.quoted.single.cs",
+					"begin": "'",
+					"end": "'",
+					"patterns": [
+						{
+							"name": "constant.character.escape.cs",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "string.quoted.verbatim.cs",
+					"begin": "@\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.cs",
+							"match": "\"\""
+						}
+					]
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.cs",
+					"match": "\\b[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?[fFdDmM]?\\b"
+				},
+				{
+					"name": "constant.numeric.hex.cs",
+					"match": "\\b0[xX][0-9a-fA-F]+[lLuU]*\\b"
+				}
+			]
+		},
+		"types": {
+			"patterns": [
+				{
+					"name": "storage.type.cs",
+					"match": "\\b(bool|byte|sbyte|char|decimal|double|float|int|uint|long|ulong|short|ushort|object|string|var|void|dynamic)\\b"
+				},
+				{
+					"name": "entity.name.type.cs",
+					"match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+				}
+			]
+		},
+		"attributes": {
+			"patterns": [
+				{
+					"name": "meta.attribute.cs",
+					"begin": "\\[",
+					"end": "\\]",
+					"patterns": [
+						{
+							"name": "entity.name.attribute.cs",
+							"match": "[a-zA-Z_][a-zA-Z0-9_]*"
+						}
+					]
+				}
+			]
+		}
+	}
+}

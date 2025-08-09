@@ -1,0 +1,109 @@
+{
+	"Home Assistant Service Call": {
+		"prefix": "ha_service",
+		"body": [
+			"await hass.CallServiceAsync(\"${1:domain}\", \"${2:service}\", new {",
+			"\t${3:// parameters}",
+			"});"
+		],
+		"description": "Call a Home Assistant service"
+	},
+	"Home Assistant Entity State": {
+		"prefix": "ha_state",
+		"body": [
+			"var state = hass.GetState(\"${1:entity_id}\");",
+			"var value = state?.State;"
+		],
+		"description": "Get entity state from Home Assistant"
+	},
+	"Home Assistant Event Listener": {
+		"prefix": "ha_event",
+		"body": [
+			"hass.OnEventReceived += (sender, eventArgs) => {",
+			"\tif (eventArgs.EventType == \"${1:event_type}\")",
+			"\t{",
+			"\t\t${2:// Handle event}",
+			"\t}",
+			"};"
+		],
+		"description": "Listen for Home Assistant events"
+	},
+	"Home Assistant WebSocket Connection": {
+		"prefix": "ha_websocket",
+		"body": [
+			"using var client = new HassClient();",
+			"var connectParameters = new ConnectionParameters {",
+			"\tAccessToken = \"${1:your_token}\",",
+			"\tHostUri = new Uri(\"${2:ws://homeassistant.local:8123}\"),",
+			"};",
+			"",
+			"await client.ConnectAsync(connectParameters);"
+		],
+		"description": "Connect to Home Assistant WebSocket API"
+	},
+	"Home Assistant Automation Trigger": {
+		"prefix": "ha_automation",
+		"body": [
+			"public class ${1:AutomationName}Automation",
+			"{",
+			"\tpublic async Task ExecuteAsync(IHass hass)",
+			"\t{",
+			"\t\t// Trigger: ${2:trigger_description}",
+			"\t\t// Condition: ${3:condition_description}",
+			"\t\t// Action:",
+			"\t\tawait hass.CallServiceAsync(\"${4:domain}\", \"${5:service}\", new {",
+			"\t\t\t${6:// action parameters}",
+			"\t\t});",
+			"\t}",
+			"}"
+		],
+		"description": "Create a Home Assistant automation class"
+	},
+	"Home Assistant Custom Component": {
+		"prefix": "ha_component",
+		"body": [
+			"[HomeAssistantComponent(\"${1:component_name}\")]",
+			"public class ${2:ComponentName}Component",
+			"{",
+			"\tprivate readonly IHass _hass;",
+			"\t",
+			"\tpublic ${2:ComponentName}Component(IHass hass)",
+			"\t{",
+			"\t\t_hass = hass;",
+			"\t}",
+			"\t",
+			"\tpublic async Task InitializeAsync()",
+			"\t{",
+			"\t\t${3:// Component initialization}",
+			"\t}",
+			"}"
+		],
+		"description": "Create a custom Home Assistant component"
+	},
+	"Home Assistant Device Class": {
+		"prefix": "ha_device",
+		"body": [
+			"public class ${1:DeviceName}Device",
+			"{",
+			"\tpublic string EntityId { get; set; } = \"${2:domain.device_name}\";",
+			"\tpublic string Name { get; set; } = \"${3:Device Name}\";",
+			"\tpublic string DeviceClass { get; set; } = \"${4:device_class}\";",
+			"\t",
+			"\tpublic async Task<string> GetStateAsync(IHass hass)",
+			"\t{",
+			"\t\tvar state = hass.GetState(EntityId);",
+			"\t\treturn state?.State ?? \"unknown\";",
+			"\t}",
+			"\t",
+			"\tpublic async Task SetStateAsync(IHass hass, string newState)",
+			"\t{",
+			"\t\tawait hass.CallServiceAsync(\"homeassistant\", \"set_state\", new {",
+			"\t\t\tentity_id = EntityId,",
+			"\t\t\tstate = newState",
+			"\t\t});",
+			"\t}",
+			"}"
+		],
+		"description": "Create a Home Assistant device class"
+	}
+}

@@ -27,7 +27,6 @@
   "activationEvents": [
     "workspaceContains:**/configuration.yaml",
     "workspaceContains:**/ui-lovelace.yaml",
-    "onLanguage:home-assistant",
     "onFileSystem:ftp",
     "onFileSystem:ssh",
     "onFileSystem:sftp"
@@ -75,6 +74,10 @@
       {
         "language": "home-assistant",
         "path": "./out/snippets/homeassistant_script.json"
+      },
+      {
+        "language": "home-assistant-csharp",
+        "path": "./out/snippets/homeassistant_csharp.json"
       }
     ],
     "languages": [
@@ -92,6 +95,18 @@
         ]
       },
       {
+        "id": "home-assistant-csharp",
+        "configuration": "./syntaxes/csharp-language-configuration.json",
+        "extensions": [
+          ".cs"
+        ],
+        "aliases": [
+          "Home Assistant C#",
+          "C#",
+          "csharp"
+        ]
+      },
+      {
         "comments": "unfortunately this dummy entry is necessary for embedding to work",
         "id": "home-assistant-jinja",
         "configuration": "./jinja-language-configuration.json"
@@ -106,6 +121,14 @@
         "language": "home-assistant",
         "scopeName": "source.home-assistant",
         "path": "./syntaxes/external/YAML.tmLanguage"
+      },
+      {
+        "comments": [
+          "C# syntax for Home Assistant C# files"
+        ],
+        "language": "home-assistant-csharp",
+        "scopeName": "source.cs",
+        "path": "./syntaxes/external/csharp.tmLanguage.json"
       },
       {
         "comments": [
@@ -421,6 +444,17 @@
           "strings": true
         },
         "editor.autoIndent": "advanced"
+      },
+      "[home-assistant-csharp]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.quickSuggestions": {
+          "other": true,
+          "comments": false,
+          "strings": true
+        },
+        "editor.autoIndent": "advanced",
+        "editor.formatOnSave": true
       }
     },
     "menus": {
